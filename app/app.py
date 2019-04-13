@@ -14,7 +14,7 @@ def create_app(config=None, testing=False, cli=True):
         content = "my message fuck" # make sure this is the actual tweet
         url = "https://www.purgomalum.com/service/containsprofanity?text={}".format(content)
         profanity = requests.get(url=url)
-        return {"profanity": bool(profanity.content)}
+        return {"profanity": profanity.content.decode('UTF8')}
 
         
 
