@@ -8,7 +8,8 @@ setuptools.setup(
     zip_safe=False,
     install_requires=[
         'Flask',
-        'requests'
+        'requests',
+        'confluent_kafka'
     ],
     extras_require={
         'dev': [
