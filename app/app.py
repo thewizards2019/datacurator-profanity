@@ -23,7 +23,7 @@ def create_app(config=None, testing=False, cli=True):
     c = Consumer(
         {
             "bootstrap.servers": "localhost:9092",
-            "group.id": "content_curator_twitter_group_19",
+            "group.id": "content_curator_twitter_group_21",
             "auto.offset.reset": "earliest",
         }
     )
@@ -43,8 +43,8 @@ def create_app(config=None, testing=False, cli=True):
 
         # print('Received message: {}'.format(msg.value().decode('utf-8')))
         try:
-            m = json.loads(msg.value().decode("utf-8").replace("'", '"'))
-            if "content" in m:
+            m = json.loads(msg.value().decode("utf-8"))
+            if "content" in m.keys():
                 content = m["content"]
                 url = "https://www.purgomalum.com/service/containsprofanity?text={}".format(
                     content
