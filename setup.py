@@ -8,6 +8,7 @@ setuptools.setup(
     zip_safe=False,
     install_requires=[
         'Flask',
+        'requests'
     ],
     extras_require={
         'dev': [
