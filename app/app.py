@@ -53,7 +53,7 @@ def create_app(config=None, testing=False, cli=True):
                 profanity_value = json.dumps(
                     {"profanity": profanity.content.decode("utf-8")}
                 )
-                msg_key = str(msg.key())
+                msg_key = msg.key().decode("utf-8")
 
                 if msg_key is not None:
                     p.produce(
