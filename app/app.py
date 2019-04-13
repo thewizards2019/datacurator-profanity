@@ -6,6 +6,7 @@ from confluent_kafka import Producer
 
 # create_app wraps the other functions to set up the project
 
+
 def create_app(config=None, testing=False, cli=True):
     """
     Application factory, used to create application
@@ -45,14 +46,20 @@ def create_app(config=None, testing=False, cli=True):
             m = json.loads(msg.value().decode("utf-8").replace("'", '"'))
             if "content" in m:
                 content = m["content"]
-                url = "https://www.purgomalum.com/service/containsprofanity?text={}".format(content)
+                url = "https://www.purgomalum.com/service/containsprofanity?text={}".format(
+                    content
+                )
                 profanity = requests.get(url=url)
-                profanity_value = json.dumps({"profanity": profanity.content.decode('utf-8')})
+                profanity_value = json.dumps(
+                    {"profanity": profanity.content.decode("utf-8")}
+                )
                 msg_key = msg.key()
 
                 if msg_key is not None:
                     p.produce(
-                        topic="content_curator_twitter", key=msg_key, value=profanity_value
+                        topic="content_curator_twitter",
+                        key=msg_key,
+                        value=profanity_value,
                     )
                     p.flush()
                     print("ADDED:", {"key": msg_key, "value": profanity_value})
