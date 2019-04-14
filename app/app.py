@@ -12,6 +12,7 @@ def create_app(config=None, testing=False, cli=True):
     Application factory, used to create application
     """
     app = Flask(__name__, static_folder=None)
+    app.port = 5003
 
     # @app.route("/profanity")
     # def profanity(self):
